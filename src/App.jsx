@@ -6,9 +6,11 @@ import TaskList from "./components/TaskList.jsx"
 function App() {
   const [tasks, setTasks] = useState([])
   const [editedTask, setEditedTask] = useState(null)
+  const [deadlineToast, setDeadlineToast] = useState(false)
   const addTask = (newTask) => {
     setTasks(prevTask => ([...prevTask, newTask]))
   }
+
   const editTask = (id) => {
     const editedTask = tasks.find(task => task.id === id)
     console.log(editedTask);
@@ -26,12 +28,23 @@ function App() {
     setTasks(prevTasks => prevTasks.filter(task => (task.id !== id))
     )
   }
+  const toggleComplete = (id) => {
+    setTasks((prevState) => prevState.map(task => task.id === id ? { ...task, completed: !task.completed } : task))
+
+  }
+  const showDeadline = () => {
+    setDeadlineToast(true)
+    setTimeout(() => {
+      setDeadlineToast(false)
+    }, 5000);
+  }
   return (
     <div>
       <Header />
+      {deadlineToast && <p>A task deadline has passed</p>}
       <TaskForm editedTask={editedTask} addTask={addTask} updateTask
         ={updateTask} />
-      <TaskList deleteTask={deleteTask} tasks={tasks} editTask={editTask} />
+      <TaskList showDeadline={showDeadline} toggleComplete={toggleComplete} deleteTask={deleteTask} tasks={tasks} editTask={editTask} />
     </div>
   )
 }

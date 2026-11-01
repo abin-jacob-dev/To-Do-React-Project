@@ -2,11 +2,11 @@
 import TaskItem from "./TaskItem"
 
 function TaskList(props) {
-    const { tasks, deleteTask, editTask } = props
+    const { tasks, deleteTask, editTask, toggleComplete, showDeadline } = props
     return (
         <div>
             {tasks.map(item => (
-                < TaskItem key={item.id} item={item} deleteTask={deleteTask} editTask={editTask} />
+                < TaskItem showDeadline={showDeadline} toggleComplete={toggleComplete} key={item.id} item={item} deleteTask={deleteTask} editTask={editTask} />
             ))}
         </div>
     )
