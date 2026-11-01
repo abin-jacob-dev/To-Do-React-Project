@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-
+import './TaskForm.css'
 function TaskForm(props) {
     const { addTask, editedTask, updateTask } = props
     const [taskName, setTaskName] = useState("")
@@ -57,7 +57,7 @@ function TaskForm(props) {
         setDateTime('')
     }
     return (
-        <form onSubmit={handleSubmit} >
+        <form className="task-form" onSubmit={handleSubmit} >
             <input onChange={handleTaskName} required value={taskName} placeholder="Task Name" type="text" />
             <textarea onChange={handleTaskDescription} value={description} placeholder="Task Description"></textarea>
             <input onChange={handleDateTime} required value={dateTime} type="datetime-local" />

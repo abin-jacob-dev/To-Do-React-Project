@@ -2,11 +2,12 @@ import { useState } from "react"
 import Header from "./components/Header.jsx"
 import TaskForm from "./components/TaskForm.jsx"
 import TaskList from "./components/TaskList.jsx"
+import './App.css'
 
 function App() {
   const [tasks, setTasks] = useState([])
   const [editedTask, setEditedTask] = useState(null)
-  const [deadlineToast, setDeadlineToast] = useState(false)
+  const [deadlineToast, setDeadlineToast] = useState('')
   const addTask = (newTask) => {
     setTasks(prevTask => ([...prevTask, newTask]))
   }
@@ -32,16 +33,16 @@ function App() {
     setTasks((prevState) => prevState.map(task => task.id === id ? { ...task, completed: !task.completed } : task))
 
   }
-  const showDeadline = () => {
-    setDeadlineToast(true)
+  const showDeadline = (taskName) => {
+    setDeadlineToast(taskName)
     setTimeout(() => {
-      setDeadlineToast(false)
+      setDeadlineToast("")
     }, 5000);
   }
   return (
-    <div>
+    <div className="app">
       <Header />
-      {deadlineToast && <p>A task deadline has passed</p>}
+      {deadlineToast && (<p className="toast">Deadline passed for: {deadlineToast}</p>)}
       <TaskForm editedTask={editedTask} addTask={addTask} updateTask
         ={updateTask} />
       <TaskList showDeadline={showDeadline} toggleComplete={toggleComplete} deleteTask={deleteTask} tasks={tasks} editTask={editTask} />

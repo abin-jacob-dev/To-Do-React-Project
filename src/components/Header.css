@@ -1,11 +1,7 @@
-
-function Header() {
-    return (
-        <div>
-            <h1>My Todo App</h1>
-            <p>Manage your daily tasks efficiently</p>
-        </div>
-    );
+.header {
+    background-color: rgb(232, 232, 232);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-
-export default Header;

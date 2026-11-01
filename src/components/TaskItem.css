@@ -1,0 +1,23 @@
+.task-item {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    /* margin-bottom: 10px; */
+}
+
+
+.task-item button {
+    margin-right: 8px;
+}
+
+.completed {
+    background-color: rgb(236, 243, 236);
+}
+
+.deadline-passed {
+    background-color: rgb(245, 226, 226);
+}
+
+.in-progress {
+    background-color: rgb(252, 252, 170);
+}

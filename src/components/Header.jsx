@@ -1,9 +1,8 @@
-
+import "./Header.css"
 function Header() {
     return (
-        <div>
-            <h1>My Todo App</h1>
-            <p>Manage your daily tasks efficiently</p>
+        <div className="header">
+            <h1>Todo App</h1>
         </div>
     );
 }

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react"
+import "./TaskItem.css"
 
 function TaskItem({ item, deleteTask, editTask, toggleComplete, showDeadline }) {
     const deadline = new Date(item.dateTime)
@@ -6,7 +7,7 @@ function TaskItem({ item, deleteTask, editTask, toggleComplete, showDeadline }) 
     const isDeadlinePassed = deadline < currentTime
     const toastFunction = () => {
         if (isDeadlinePassed && !item.completed && !showToast.current) {
-            showDeadline()
+            showDeadline(item.taskName)
             showToast.current = true
         }
     }
@@ -18,20 +19,20 @@ function TaskItem({ item, deleteTask, editTask, toggleComplete, showDeadline }) 
         }, 1000);
         return () => clearInterval(interval)
     }, [isDeadlinePassed, item.completed])
+
+
     return (
-        <div>
-            <div>
-                <p >Task ID : {item.id}</p>
-                <p >Task Name : {item.taskName}</p>
-                <p >Description : {item.description}</p>
-                <p >Deadline : {item.dateTime}</p>
-                <p >Completion status : {item.completed ? 'Completed' : 'Pending'}</p>
-                <p>Deadline : {isDeadlinePassed ? "Deadline Passed" : "In Progress"}</p>
-                <button onClick={() => toggleComplete(item.id)}  >{item.completed ? "Mark Pending" : "Mark Complete"}</button>
-                <button onClick={() => deleteTask(item.id)}>Delete</button>
-                <button onClick={() => editTask(item.id)}>Edit</button>
-                <p>---------------------------------------</p>
-            </div>
+        <div className={`task-item ${item.completed ? `completed` : isDeadlinePassed ? `deadline-passed` : `in-progress`}`} >
+            <p >Task ID : {item.id}</p>
+            <p >Task Name : {item.taskName}</p>
+            <p >Description : {item.description}</p>
+            <p >Deadline : {item.dateTime}</p>
+            <p >Completion status : {item.completed ? 'Completed' : 'Pending'}</p>
+            <p>Deadline : {isDeadlinePassed ? "Deadline Passed" : "In Progress"}</p>
+            <button onClick={() => toggleComplete(item.id)}  >{item.completed ? "Mark Pending" : "Mark Complete"}</button>
+            <button onClick={() => deleteTask(item.id)}>Delete</button>
+            <button onClick={() => editTask(item.id)}>Edit</button>
+
 
         </div>
     )
