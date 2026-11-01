@@ -1,10 +1,17 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 function TaskForm(props) {
-    const { addTask } = props
+    const { addTask, editedTask, updateTask } = props
     const [taskName, setTaskName] = useState("")
     const [description, setDescription] = useState("")
     const [dateTime, setDateTime] = useState("")
+    useEffect(() => {
+        if (editedTask !== null) {
+            setTaskName(editedTask.taskName)
+            setDescription(editedTask.description)
+            setDateTime(editedTask.dateTime)
+        }
+    }, [editedTask])
     const handleTaskName = (e) => {
         const taskName = e.target.value
         setTaskName(taskName)
@@ -31,7 +38,20 @@ function TaskForm(props) {
             dateTime,
             completed: false
         }
-        addTask(newTask)
+
+        if (editedTask !== null) {
+            const updatedValues = {
+                id: editedTask.id,
+                taskName,
+                description,
+                dateTime,
+                completed: editedTask.completed
+            }
+            updateTask(updatedValues)
+        } else {
+
+            addTask(newTask)
+        }
         setTaskName('')
         setDescription('')
         setDateTime('')

@@ -1,4 +1,4 @@
-function TaskItem({ item, deleteTask }) {
+function TaskItem({ item, deleteTask, editTask }) {
 
     return (
         <div>
@@ -8,7 +8,8 @@ function TaskItem({ item, deleteTask }) {
                 <p >Description : {item.description}</p>
                 <p >Deadline : {item.dateTime}</p>
                 <p >Completion status : {item.completed ? 'Completed' : 'Pending'}</p>
-                <button onClick={()=>deleteTask(item.id)} type="submit">Delete</button>
+                <button onClick={() => deleteTask(item.id)}>Delete</button>
+                <button onClick={() => editTask(item.id)}>Edit</button>
                 <p>---------------------------------------</p>
             </div>
 
