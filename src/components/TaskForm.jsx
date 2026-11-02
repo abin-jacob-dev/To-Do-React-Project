@@ -61,8 +61,7 @@ function TaskForm(props) {
             <input onChange={handleTaskName} required value={taskName} placeholder="Task Name" type="text" />
             <textarea onChange={handleTaskDescription} value={description} placeholder="Task Description"></textarea>
             <input onChange={handleDateTime} required value={dateTime} type="datetime-local" />
-            {/* <input type="checkbox" checked={task.completed} /> */}
-            <button type="submit" >Add Task</button>
+            <button type="submit" >{editedTask !== null ? 'Edit Task' : "Add Task"}</button>
         </form >
     )
 }
